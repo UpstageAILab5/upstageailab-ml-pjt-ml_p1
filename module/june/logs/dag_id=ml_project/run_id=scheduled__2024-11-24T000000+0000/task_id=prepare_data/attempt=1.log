@@ -1,0 +1,38 @@
+[2024-11-25T15:50:58.947+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_project.prepare_data scheduled__2024-11-24T00:00:00+00:00 [queued]>
+[2024-11-25T15:50:58.953+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_project.prepare_data scheduled__2024-11-24T00:00:00+00:00 [queued]>
+[2024-11-25T15:50:58.953+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2024-11-25T15:50:58.965+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): prepare_data> on 2024-11-24 00:00:00+00:00
+[2024-11-25T15:50:58.975+0000] {standard_task_runner.py:60} INFO - Started process 678 to run task
+[2024-11-25T15:50:58.978+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ml_project', 'prepare_data', 'scheduled__2024-11-24T00:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/ml_project.py', '--cfg-path', '/tmp/tmprd2x5tan']
+[2024-11-25T15:50:58.980+0000] {standard_task_runner.py:88} INFO - Job 11: Subtask prepare_data
+[2024-11-25T15:50:59.015+0000] {task_command.py:423} INFO - Running <TaskInstance: ml_project.prepare_data scheduled__2024-11-24T00:00:00+00:00 [running]> on host e084ca88f62c
+[2024-11-25T15:50:59.072+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ml_project' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T00:00:00+00:00'
+[2024-11-25T15:51:00.050+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/35000 [00:00<?, ? examples/s]
+[2024-11-25T15:51:00.151+0000] {logging_mixin.py:188} WARNING - Map:   7%|6         | 2310/35000 [00:00<00:01, 22967.40 examples/s]
+[2024-11-25T15:51:00.251+0000] {logging_mixin.py:188} WARNING - Map:  13%|#3        | 4667/35000 [00:00<00:01, 23315.53 examples/s]
+[2024-11-25T15:51:00.356+0000] {logging_mixin.py:188} WARNING - Map:  20%|##        | 7000/35000 [00:00<00:01, 22815.14 examples/s]
+[2024-11-25T15:51:00.456+0000] {logging_mixin.py:188} WARNING - Map:  27%|##7       | 9613/35000 [00:00<00:01, 24102.96 examples/s]
+[2024-11-25T15:51:00.612+0000] {logging_mixin.py:188} WARNING - Map:  37%|###7      | 13000/35000 [00:00<00:00, 22988.54 examples/s]
+[2024-11-25T15:51:00.762+0000] {logging_mixin.py:188} WARNING - Map:  47%|####7     | 16573/35000 [00:00<00:00, 23300.75 examples/s]
+[2024-11-25T15:51:00.864+0000] {logging_mixin.py:188} WARNING - Map:  54%|#####4    | 19000/35000 [00:00<00:00, 23434.80 examples/s]
+[2024-11-25T15:51:00.964+0000] {logging_mixin.py:188} WARNING - Map:  61%|######1   | 21396/35000 [00:00<00:00, 23579.73 examples/s]
+[2024-11-25T15:51:01.064+0000] {logging_mixin.py:188} WARNING - Map:  68%|######8   | 23962/35000 [00:01<00:00, 24167.54 examples/s]
+[2024-11-25T15:51:01.216+0000] {logging_mixin.py:188} WARNING - Map:  76%|#######5  | 26589/35000 [00:01<00:00, 21585.51 examples/s]
+[2024-11-25T15:51:01.317+0000] {logging_mixin.py:188} WARNING - Map:  83%|########2 | 29000/35000 [00:01<00:00, 22182.57 examples/s]
+[2024-11-25T15:51:01.417+0000] {logging_mixin.py:188} WARNING - Map:  90%|########9 | 31400/35000 [00:01<00:00, 22678.04 examples/s]
+[2024-11-25T15:51:01.517+0000] {logging_mixin.py:188} WARNING - Map:  97%|#########6| 33823/35000 [00:01<00:00, 23110.60 examples/s]
+[2024-11-25T15:51:01.576+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 35000/35000 [00:01<00:00, 22944.89 examples/s]
+[2024-11-25T15:51:01.577+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/15000 [00:00<?, ? examples/s]
+[2024-11-25T15:51:01.678+0000] {logging_mixin.py:188} WARNING - Map:  17%|#7        | 2595/15000 [00:00<00:00, 25811.19 examples/s]
+[2024-11-25T15:51:01.830+0000] {logging_mixin.py:188} WARNING - Map:  42%|####1     | 6284/15000 [00:00<00:00, 24849.52 examples/s]
+[2024-11-25T15:51:01.930+0000] {logging_mixin.py:188} WARNING - Map:  59%|#####8    | 8828/15000 [00:00<00:00, 25078.24 examples/s]
+[2024-11-25T15:51:02.082+0000] {logging_mixin.py:188} WARNING - Map:  83%|########2 | 12417/15000 [00:00<00:00, 24401.38 examples/s]
+[2024-11-25T15:51:02.194+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:00<00:00, 23972.08 examples/s]
+[2024-11-25T15:51:02.195+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:00<00:00, 24307.20 examples/s]
+[2024-11-25T15:51:05.114+0000] {logging_mixin.py:188} INFO - 학습 및 테스트 데이터 저장 완료:
+[2024-11-25T15:51:05.114+0000] {logging_mixin.py:188} INFO - 학습 데이터: /opt/***/data/tinybert_train.csv
+[2024-11-25T15:51:05.114+0000] {logging_mixin.py:188} INFO - 테스트 데이터: /opt/***/data/tinybert_test.csv
+[2024-11-25T15:51:05.121+0000] {python.py:201} INFO - Done. Returned value was: None
+[2024-11-25T15:51:05.128+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=ml_project, task_id=prepare_data, execution_date=20241124T000000, start_date=20241125T155058, end_date=20241125T155105
+[2024-11-25T15:51:05.196+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-11-25T15:51:05.213+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

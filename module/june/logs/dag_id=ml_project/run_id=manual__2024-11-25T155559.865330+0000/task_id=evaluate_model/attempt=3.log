@@ -1,0 +1,54 @@
+[2024-11-25T18:50:02.284+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_project.evaluate_model manual__2024-11-25T15:55:59.865330+00:00 [queued]>
+[2024-11-25T18:50:02.289+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_project.evaluate_model manual__2024-11-25T15:55:59.865330+00:00 [queued]>
+[2024-11-25T18:50:02.289+0000] {taskinstance.py:2170} INFO - Starting attempt 3 of 4
+[2024-11-25T18:50:02.299+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): evaluate_model> on 2024-11-25 15:55:59.865330+00:00
+[2024-11-25T18:50:02.311+0000] {standard_task_runner.py:60} INFO - Started process 11855 to run task
+[2024-11-25T18:50:02.314+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ml_project', 'evaluate_model', 'manual__2024-11-25T15:55:59.865330+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/ml_project.py', '--cfg-path', '/tmp/tmp14z76ujw']
+[2024-11-25T18:50:02.315+0000] {standard_task_runner.py:88} INFO - Job 30: Subtask evaluate_model
+[2024-11-25T18:50:02.350+0000] {task_command.py:423} INFO - Running <TaskInstance: ml_project.evaluate_model manual__2024-11-25T15:55:59.865330+00:00 [running]> on host e084ca88f62c
+[2024-11-25T18:50:02.404+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ml_project' AIRFLOW_CTX_TASK_ID='evaluate_model' AIRFLOW_CTX_EXECUTION_DATE='2024-11-25T15:55:59.865330+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-25T15:55:59.865330+00:00'
+[2024-11-25T18:50:03.950+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/scripts/evaluate_model.py", line 24, in evaluate_model
+    predictions = classifier(test_df['review'].tolist())
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/text_classification.py", line 156, in __call__
+    result = super().__call__(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/base.py", line 1121, in __call__
+    outputs = list(final_iterator)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/pt_utils.py", line 124, in __next__
+    item = next(self.iterator)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/pt_utils.py", line 125, in __next__
+    processed = self.infer(item, **self.params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/base.py", line 1046, in forward
+    model_outputs = self._forward(model_inputs, **forward_params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/pipelines/text_classification.py", line 187, in _forward
+    return self.model(**model_inputs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/models/bert/modeling_bert.py", line 1564, in forward
+    outputs = self.bert(
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/models/bert/modeling_bert.py", line 1006, in forward
+    embedding_output = self.embeddings(
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/transformers/models/bert/modeling_bert.py", line 238, in forward
+    embeddings += position_embeddings
+RuntimeError: The size of tensor a (526) must match the size of tensor b (512) at non-singleton dimension 1
+[2024-11-25T18:50:03.959+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=ml_project, task_id=evaluate_model, execution_date=20241125T155559, start_date=20241125T185002, end_date=20241125T185003
+[2024-11-25T18:50:03.969+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 30 for task evaluate_model (The size of tensor a (526) must match the size of tensor b (512) at non-singleton dimension 1; 11855)
+[2024-11-25T18:50:04.011+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-11-25T18:50:04.027+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

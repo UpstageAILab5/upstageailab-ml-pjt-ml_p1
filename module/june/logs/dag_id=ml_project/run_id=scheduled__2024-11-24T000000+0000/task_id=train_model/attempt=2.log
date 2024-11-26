@@ -1,0 +1,32 @@
+[2024-11-25T15:52:37.029+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_project.train_model scheduled__2024-11-24T00:00:00+00:00 [queued]>
+[2024-11-25T15:52:37.034+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_project.train_model scheduled__2024-11-24T00:00:00+00:00 [queued]>
+[2024-11-25T15:52:37.034+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 4
+[2024-11-25T15:52:37.043+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2024-11-24 00:00:00+00:00
+[2024-11-25T15:52:37.056+0000] {standard_task_runner.py:60} INFO - Started process 915 to run task
+[2024-11-25T15:52:37.059+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ml_project', 'train_model', 'scheduled__2024-11-24T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/ml_project.py', '--cfg-path', '/tmp/tmpq9jfnj8t']
+[2024-11-25T15:52:37.061+0000] {standard_task_runner.py:88} INFO - Job 15: Subtask train_model
+[2024-11-25T15:52:37.095+0000] {task_command.py:423} INFO - Running <TaskInstance: ml_project.train_model scheduled__2024-11-24T00:00:00+00:00 [running]> on host e084ca88f62c
+[2024-11-25T15:52:37.147+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ml_project' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2024-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-24T00:00:00+00:00'
+[2024-11-25T15:52:37.153+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py:797 FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+[2024-11-25T15:52:39.813+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/35000 [00:00<?, ? examples/s]
+[2024-11-25T15:52:51.903+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 35000/35000 [00:12<00:00, 2895.23 examples/s]
+[2024-11-25T15:52:52.057+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 35000/35000 [00:12<00:00, 2858.83 examples/s]
+[2024-11-25T15:52:52.064+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/15000 [00:00<?, ? examples/s]
+[2024-11-25T15:52:55.498+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:03<00:00, 4368.56 examples/s]
+[2024-11-25T15:52:55.558+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:03<00:00, 4294.67 examples/s]
+[2024-11-25T15:52:55.560+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py:797 FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+[2024-11-25T15:52:55.873+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/scripts/train_model.py", line 52, in train_model
+    args = TrainingArguments(
+TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'eval_strategy'
+[2024-11-25T15:52:55.880+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=ml_project, task_id=train_model, execution_date=20241124T000000, start_date=20241125T155237, end_date=20241125T155255
+[2024-11-25T15:52:55.892+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 15 for task train_model (TrainingArguments.__init__() got an unexpected keyword argument 'eval_strategy'; 915)
+[2024-11-25T15:52:56.134+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-11-25T15:52:56.156+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

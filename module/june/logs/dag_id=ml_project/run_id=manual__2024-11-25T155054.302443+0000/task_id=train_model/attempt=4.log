@@ -1,0 +1,49 @@
+[2024-11-25T15:55:23.432+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_project.train_model manual__2024-11-25T15:50:54.302443+00:00 [queued]>
+[2024-11-25T15:55:23.437+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_project.train_model manual__2024-11-25T15:50:54.302443+00:00 [queued]>
+[2024-11-25T15:55:23.437+0000] {taskinstance.py:2170} INFO - Starting attempt 4 of 4
+[2024-11-25T15:55:23.448+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2024-11-25 15:50:54.302443+00:00
+[2024-11-25T15:55:23.459+0000] {standard_task_runner.py:60} INFO - Started process 1263 to run task
+[2024-11-25T15:55:23.461+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ml_project', 'train_model', 'manual__2024-11-25T15:50:54.302443+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/ml_project.py', '--cfg-path', '/tmp/tmp07g09dwp']
+[2024-11-25T15:55:23.463+0000] {standard_task_runner.py:88} INFO - Job 18: Subtask train_model
+[2024-11-25T15:55:23.500+0000] {task_command.py:423} INFO - Running <TaskInstance: ml_project.train_model manual__2024-11-25T15:50:54.302443+00:00 [running]> on host e084ca88f62c
+[2024-11-25T15:55:23.555+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ml_project' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2024-11-25T15:50:54.302443+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-25T15:50:54.302443+00:00'
+[2024-11-25T15:55:23.561+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py:797 FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+[2024-11-25T15:55:26.339+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/35000 [00:00<?, ? examples/s]
+[2024-11-25T15:55:37.494+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 35000/35000 [00:11<00:00, 3137.84 examples/s]
+[2024-11-25T15:55:37.624+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 35000/35000 [00:11<00:00, 3101.80 examples/s]
+[2024-11-25T15:55:37.629+0000] {logging_mixin.py:188} WARNING - Map:   0%|          | 0/15000 [00:00<?, ? examples/s]
+[2024-11-25T15:55:40.629+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:02<00:00, 5001.79 examples/s]
+[2024-11-25T15:55:40.697+0000] {logging_mixin.py:188} WARNING - Map: 100%|##########| 15000/15000 [00:03<00:00, 4890.81 examples/s]
+[2024-11-25T15:55:40.700+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py:797 FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+[2024-11-25T15:55:41.368+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/pydantic/_internal/_fields.py:149 UserWarning: Field "model_server_url" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+[2024-11-25T15:55:41.380+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/pydantic/_internal/_config.py:321 UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+[2024-11-25T15:55:41.716+0000] {logging_mixin.py:188} WARNING - 2024/11/25 15:55:41 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2024-11-25T15:55:41.863+0000] {logging_mixin.py:188} WARNING -   0%|          | 0/3282 [00:00<?, ?it/s]
+[2024-11-25T15:55:44.061+0000] {logging_mixin.py:188} WARNING -   0%|          | 1/3282 [00:02<2:00:08,  2.20s/it]
+[2024-11-25T15:55:47.343+0000] {logging_mixin.py:188} WARNING -   0%|          | 2/3282 [00:05<2:34:58,  2.83s/it]
+[2024-11-25T15:55:50.708+0000] {logging_mixin.py:188} WARNING -   0%|          | 3/3282 [00:08<2:48:09,  3.08s/it]
+[2024-11-25T15:55:54.274+0000] {logging_mixin.py:188} WARNING -   0%|          | 4/3282 [00:12<2:58:39,  3.27s/it]
+[2024-11-25T15:55:58.185+0000] {logging_mixin.py:188} WARNING -   0%|          | 5/3282 [00:16<3:11:13,  3.50s/it]
+[2024-11-25T15:56:01.800+0000] {logging_mixin.py:188} WARNING -   0%|          | 6/3282 [00:19<3:13:17,  3.54s/it]
+[2024-11-25T15:56:05.500+0000] {logging_mixin.py:188} WARNING -   0%|          | 7/3282 [00:23<3:16:04,  3.59s/it]
+[2024-11-25T15:56:08.922+0000] {logging_mixin.py:188} WARNING -   0%|          | 8/3282 [00:27<3:13:02,  3.54s/it]
+[2024-11-25T15:56:11.149+0000] {local_task_job_runner.py:234} INFO - Task exited with return code -9
+[2024-11-25T15:56:11.542+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
