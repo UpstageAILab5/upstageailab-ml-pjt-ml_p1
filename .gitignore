@@ -1,0 +1,7 @@
+module/june/models/
+module/june/logs/
+module/june/train_dir/
+module/june/keys/
+module/june/plugins/
+module/june/mlruns/
+.venv/
