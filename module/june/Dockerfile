@@ -57,5 +57,7 @@ EXPOSE 8080
 
 # 컨테이너 시작 시 Supervisor 실행
 # Supervisor가 설정 파일에 정의된 대로 Airflow 프로세스들을 관리
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+USER airflow
 
+CMD ["airflow", "standalone"]
