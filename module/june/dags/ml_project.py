@@ -50,6 +50,14 @@ with DAG(
         '''
     )
 
+    setup_mlflow_task = SSHOperator(
+        task_id='setup_mlflow',  # 태스크 식별자
+        ssh_conn_id='upstage_remote_server_ssh',  # Airflow에 설정된 SSH 연결 ID
+        command='''
+            /opt/conda/bin/python /data/ephemeral/home/scripts/setup_mlflow.py 
+        '''
+    )
+
     # 2단계: 모델 학습 태스크
     # 전처리된 데이터를 사용하여 TinyBERT 모델 학습
     train_model_task = SSHOperator(
@@ -61,7 +69,8 @@ with DAG(
             --input_test_path /data/ephemeral/home/data/tinybert_test.csv \
             --model_output_dir /data/ephemeral/home/models/tinybert-sentiment-analysis \
             --train_output_dir /data/ephemeral/home/train_dir
-        '''
+        ''',
+        cmd_timeout=10800
     )
 
     fetch_tinybert_model_task = PythonOperator(
@@ -73,14 +82,15 @@ with DAG(
         }
     )
 
-    fetch_train_dir_task = PythonOperator(
-        task_id='fetch_train_dir',
-        python_callable=fetch_model,
-        op_kwargs={
-            'remote_path': '/data/ephemeral/home/train_dir',
-            'local_path': '/opt/airflow/train_dir'
-        }
-    )
+    
+    # fetch_train_dir_task = PythonOperator(
+    #     task_id='fetch_train_dir',
+    #     python_callable=fetch_model,
+    #     op_kwargs={
+    #         'remote_path': '/data/ephemeral/home/train_dir',
+    #         'local_path': '/opt/airflow/train_dir'
+    #     }
+    # )
 
     # 3단계: 모델 평가 태스크
     # 학습된 모델의 성능을 테스트 데이터셋으로 평가
@@ -104,5 +114,4 @@ with DAG(
     )
 
     # 태스크 간의 실행 순서 정의
-    # prepare_data -> train_model -> evaluate_model -> select_best_model 순으로 실행
-    prepare_data_task >> train_model_task >> [fetch_tinybert_model_task, fetch_train_dir_task] >> evaluate_model_task >> select_best_model_task
+    prepare_data_task >> setup_mlflow_task >> train_model_task >> fetch_tinybert_model_task >> evaluate_model_task >> select_best_model_task
