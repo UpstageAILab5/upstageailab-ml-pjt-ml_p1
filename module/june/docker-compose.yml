@@ -48,13 +48,7 @@ services:
     entrypoint: >  # 초기화 명령어 실행
       bash -c "
         airflow db init &&  # DB 초기화
-        airflow users create \  # 관리자 계정 생성
-          --username admin \
-          --password admin \
-          --firstname Admin \
-          --lastname User \
-          --role Admin \
-          --email admin@example.com ||
+        airflow users create -u test -f first -l last -r Admin -e test@example.com -p 123 ||
         echo 'User already exists.'  # 계정이 이미 존재하는 경우 메시지 출력
       "
 
