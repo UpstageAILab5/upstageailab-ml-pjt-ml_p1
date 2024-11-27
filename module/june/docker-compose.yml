@@ -1,7 +1,7 @@
 # docker-compose.yml
 # 이 파일은 Airflow와 MLflow를 위한 Docker 컨테이너 구성을 정의합니다.
 
-# version: "3.8"  # Docker Compose 파일 형식 버전 지정
+version: "3.12"  # Docker Compose 파일 형식 버전 지정
 
 services:
   # PostgreSQL 데이터베이스 서비스 설정

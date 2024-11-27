@@ -1,5 +1,5 @@
 # Apache Airflow 2.8.1 버전을 기반으로 하는 도커 이미지 생성
-# Python 3.10 버전 사용
+# Python 3.12 버전 사용
 FROM apache/airflow:2.8.1-python3.10
 
 # Airflow가 사용할 홈 디렉토리 환경변수 설정 
@@ -58,3 +58,4 @@ EXPOSE 8080
 # 컨테이너 시작 시 Supervisor 실행
 # Supervisor가 설정 파일에 정의된 대로 Airflow 프로세스들을 관리
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
