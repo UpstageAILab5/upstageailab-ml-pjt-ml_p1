@@ -3,7 +3,6 @@ import evaluate  # Hugging Face의 평가 메트릭을 사용하기 위한 라�
 import numpy as np  # 배열 및 행렬 연산을 위한 수치 계산 라이브러리 
 import pandas as pd  # 데이터프레임 처리를 위한 데이터 분석 라이브러리
 from transformers import pipeline  # Hugging Face의 사전 학습 모델을 쉽게 사용하기 위한 파이프라인
-import mlflow  # MLflow를 사용하여 모델 평가 메트릭을 기록하는 라이브러리
 
 def evaluate_model(model_dir: str, test_data_path: str):
     """
@@ -15,6 +14,7 @@ def evaluate_model(model_dir: str, test_data_path: str):
     """
     # Hugging Face의 accuracy 메트릭을 로드
     # 이진 분류 문제의 정확도를 계산하는데 사용됨
+    
     accuracy = evaluate.load('accuracy')
 
     classifier = pipeline(
@@ -39,10 +39,6 @@ def evaluate_model(model_dir: str, test_data_path: str):
     # references: 실제 정답 레이블
     acc_score = accuracy.compute(predictions=pred_labels, references=test_df['label'].tolist())
     
-    # MLflow에 평가 메트릭 기록
-    mlflow.log_metrics({
-        "test_accuracy": acc_score['accuracy']
-    })
     # 평가 결과 출력
     # 소수점 4자리까지 정확도 표시
     print(f"모델 평가 결과:")

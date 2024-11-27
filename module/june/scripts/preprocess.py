@@ -1,6 +1,7 @@
 # 데이터 전처리를 위한 필수 라이브러리 임포트
-import pandas as pd  # 데이터프레임 처리를 위한 pandas 라이브러리
-from datasets import Dataset  # Hugging Face의 데이터셋 처리 라이브러리
+import pandas as pd  
+from datasets import Dataset 
+import argparse
 
 def prepare_data(input_path: str, train_output_path: str, test_output_path: str):
     """
@@ -42,3 +43,22 @@ def prepare_data(input_path: str, train_output_path: str, test_output_path: str)
     print("학습 및 테스트 데이터 저장 완료:")
     print(f"학습 데이터: {train_output_path}")
     print(f"테스트 데이터: {test_output_path}")
+
+
+if __name__ == "__main__":
+
+    # 커맨드 라인 인자 파서 생성
+    parser = argparse.ArgumentParser(description='데이터 전처리 스크립트')
+    parser.add_argument('--input_path', required=True, help='입력 CSV 파일 경로')
+    parser.add_argument('--train_output_path', required=True, help='학습 데이터 출력 경로')
+    parser.add_argument('--test_output_path', required=True, help='테스트 데이터 출력 경로')
+
+    # 인자 파싱
+    args = parser.parse_args()
+
+    # prepare_data 함수 실행
+    prepare_data(
+        input_path=args.input_path,
+        train_output_path=args.train_output_path,
+        test_output_path=args.test_output_path
+    )
