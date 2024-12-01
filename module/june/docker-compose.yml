@@ -1,8 +1,6 @@
 # docker-compose.yml
 # 이 파일은 Airflow와 MLflow를 위한 Docker 컨테이너 구성을 정의합니다.
 
-version: "3.8"  # Docker Compose 파일 형식 버전 지정
-
 services:
   # PostgreSQL 데이터베이스 서비스 설정
   # Airflow의 메타데이터 저장소로 사용됩니다.
@@ -36,6 +34,11 @@ services:
       - AIRFLOW__CORE__LOAD_EXAMPLES=False  # 예제 DAG 로드하지 않음
       - MLFLOW_TRACKING_URI=http://mlflow-server:5000  # MLflow 서버 주소
       - PYTHONPATH=/opt/airflow/scripts  # Python 모듈 검색 경로 추가
+      - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
+      - AIRFLOW__LOGGING__LOGGING_LEVEL=INFO
+      - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.basic_auth
+      - AIRFLOW__WEBSERVER__SECRET_KEY=b'4\x19\xa7[H\r\xbba\xa0\x00\xc5\xf3\x1d\n\x86X'
+      - OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
     volumes:  # 호스트-컨테이너 간 디렉토리 마운트
       - ./dags:/opt/airflow/dags  # DAG 파일 저장 위치
       - ./logs:/opt/airflow/logs  # 로그 파일 저장 위치
@@ -48,7 +51,13 @@ services:
     entrypoint: >  # 초기화 명령어 실행
       bash -c "
         airflow db init &&  # DB 초기화
-        airflow users create -u test -f first -l last -r Admin -e test@example.com -p 123 ||
+        airflow users create \  # 관리자 계정 생성
+          --username admin \
+          --password admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@example.com ||
         echo 'User already exists.'  # 계정이 이미 존재하는 경우 메시지 출력
       "
 
@@ -72,6 +81,11 @@ services:
       - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=60  # DAG 디렉토리 스캔 주기(초)
       - AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL=10  # 파일 처리 최소 간격(초)
       - PYTHONPATH=/opt/airflow/scripts
+      - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
+      - AIRFLOW__LOGGING__LOGGING_LEVEL=INFO
+      - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.basic_auth
+      - AIRFLOW__WEBSERVER__SECRET_KEY=b'4\x19\xa7[H\r\xbba\xa0\x00\xc5\xf3\x1d\n\x86X'
+      - OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
     volumes:  # 볼륨 마운트 설정
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
@@ -105,6 +119,11 @@ services:
       - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=60
       - AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL=10
       - PYTHONPATH=/opt/airflow/scripts
+      - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
+      - AIRFLOW__LOGGING__LOGGING_LEVEL=INFO
+      - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.basic_auth
+      - AIRFLOW__WEBSERVER__SECRET_KEY=b'4\x19\xa7[H\r\xbba\xa0\x00\xc5\xf3\x1d\n\x86X'
+      - OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
     volumes:  # 볼륨 마운트 설정
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs

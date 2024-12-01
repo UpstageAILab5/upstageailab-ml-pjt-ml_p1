@@ -1,10 +1,12 @@
-# Apache Airflow 2.8.1 버전을 기반으로 하는 도커 이미지 생성
+# Apache Airflow 2.10.3 버전을 기반으로 하는 도커 이미지 생성
 # Python 3.12 버전 사용
-FROM apache/airflow:2.8.1-python3.10
+FROM apache/airflow:2.10.3-python3.12
 
 # Airflow가 사용할 홈 디렉토리 환경변수 설정 
 # 모든 Airflow 관련 파일들이 이 디렉토리 아래에 저장됨
 ENV AIRFLOW_HOME=/opt/airflow
+ENV PYTHONPATH="${PYTHONPATH}:/opt/airflow"
+ENV OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # root 사용자로 전환하여 시스템 레벨의 설치 작업 수행
 USER root
@@ -20,9 +22,17 @@ RUN apt-get update && \
     gcc \
     libc-dev \
     python3-tk \
-    tk-dev \
-    supervisor && \
-    rm -rf /var/lib/apt/lists/*  # 설치 후 캐시 제거로 이미지 크기 최적화
+    tk-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# airflow 그룹과 사용자가 없는 경우에만 생성
+RUN getent group airflow || groupadd airflow && \
+    getent passwd airflow || useradd -g airflow airflow
+
+# Airflow 디렉토리 생성 및 권한 설정
+RUN mkdir -p ${AIRFLOW_HOME} ${AIRFLOW_HOME}/logs && \
+    chown -R airflow:airflow ${AIRFLOW_HOME}
+
 
 # airflow 사용자로 전환하여 Python 패키지 관련 작업 수행
 USER airflow
@@ -40,24 +50,17 @@ USER root
 # COPY scripts/ /opt/airflow/scripts/
 # RUN chmod +x /opt/airflow/scripts/*.py
 
+RUN mkdir -p ${AIRFLOW_HOME}/logs && \
+    chown -R airflow:airflow ${AIRFLOW_HOME}/logs
+
 # Airflow 작업 디렉토리 생성 및 작업 디렉토리로 설정
 RUN mkdir -p $AIRFLOW_HOME
 WORKDIR $AIRFLOW_HOME
-
-# Supervisor 설정 파일 복사 및 권한 설정
-# Supervisor는 Airflow의 여러 컴포넌트(웹서버, 스케줄러 등)를 관리
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN chown airflow: /etc/supervisor/conf.d/supervisord.conf
 
 # Airflow DAG 파일들을 컨테이너의 dags 디렉토리로 복사
 COPY dags/ $AIRFLOW_HOME/dags/
 
 # 컨테이너가 사용할 포트 설정 (Airflow 웹 서버용)
 EXPOSE 8080
-
-# 컨테이너 시작 시 Supervisor 실행
-# Supervisor가 설정 파일에 정의된 대로 Airflow 프로세스들을 관리
-# CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-USER airflow
 
 CMD ["airflow", "standalone"]

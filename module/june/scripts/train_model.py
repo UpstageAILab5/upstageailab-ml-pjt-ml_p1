@@ -10,6 +10,8 @@ import os
 import time
 from datetime import datetime
 
+os.environ["NO_PROXY"] = "*"
+
 # MLflow 서버 연결 설정
 os.environ["MLFLOW_TRACKING_URI"] = "http://10.196.197.32:30162"
 
