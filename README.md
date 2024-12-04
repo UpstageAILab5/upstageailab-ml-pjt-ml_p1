@@ -16,7 +16,7 @@
 
 ### 3. 감성 점수 부여
 - **설명**: llama-3-Korean-Bllossom-8B 모델을 통해 각 리뷰에 감성 점수를 부여합니다.
-- **모델**: [llama-3-Korean-Bllossom-8B](https://huggingface.co/llama-3-Korean-Bllossom-8B)
+- **모델**: [llama-3-Korean-Bllossom-8B](https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B)
 
 ### 4. 데이터 시각화 및 추천 시스템
 - **설명**: Streamlit을 이용하여 최종 데이터를 시각화하고, 사용자가 입력한 음식명을 기반으로 데이터에 있는 식당을 추천합니다.
